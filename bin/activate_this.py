@@ -13,7 +13,11 @@ except NameError:
 import sys
 import os
 
+<<<<<<< HEAD
 old_os_path = os.environ['PATH']
+=======
+old_os_path = os.environ.get('PATH', '')
+>>>>>>> 9459088bb25ddc25dfea5e6c10b301c783669fad
 os.environ['PATH'] = os.path.dirname(os.path.abspath(__file__)) + os.pathsep + old_os_path
 base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if sys.platform == 'win32':

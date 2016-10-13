@@ -7,7 +7,11 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
+<<<<<<< HEAD
 setenv VIRTUAL_ENV "/home/tushar/workspace/crawlers"
+=======
+setenv VIRTUAL_ENV "/home/ubuntu/workspace/book_shops"
+>>>>>>> 9459088bb25ddc25dfea5e6c10b301c783669fad
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"
@@ -17,6 +21,7 @@ setenv PATH "$VIRTUAL_ENV/bin:$PATH"
 if ("" != "") then
     set env_name = ""
 else
+<<<<<<< HEAD
     if (`basename "$VIRTUAL_ENV"` == "__") then
         # special case for Aspen magic directories
         # see http://www.zetadev.com/software/aspen/
@@ -24,6 +29,9 @@ else
     else
         set env_name = `basename "$VIRTUAL_ENV"`
     endif
+=======
+    set env_name = `basename "$VIRTUAL_ENV"`
+>>>>>>> 9459088bb25ddc25dfea5e6c10b301c783669fad
 endif
 
 # Could be in a non-interactive environment,
