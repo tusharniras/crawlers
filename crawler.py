@@ -20,7 +20,7 @@ def addAddress(address):
 def findLinks():
     client = MongoClient()
     db = client.sher
-    dump = db.address_links.find({ "crawl": { "$exists": False } })
+    dump = db.address_links.find({ "crawling.status": { "$exists": False } })
     links = []
     for link in dump:
         links.append(link)
@@ -36,13 +36,15 @@ def parseShop(url):
     store['short_location'] = soup.find("span", { "class" : "muted" }).string
     details = soup.find_all("div", { "class" : "profile-details" })
     address = ""
-    for addr in details[1].div.address.find_all('span'):
-        addr = addr.text.replace(",", "")
-        address += ", %s" % str(addr)
-        if "," in address[0]:
-            address = str(address[2:])
-    store['address'] = str(address)
-
+    try:
+        for addr in details[1].div.address.find_all('span'):
+            addr = addr.text.replace(",", "")
+            address += ", %s" % str(addr)
+            if "," in address[0]:
+                address = str(address[2:])
+        store['address'] = str(address)
+    except:
+        pass
     for ch in details:
         try:
             if ch.div.string == None:
@@ -57,9 +59,12 @@ def parseShop(url):
 
 links = findLinks()
 
+print links
+
 
 for link in links:
     addAddress(parseShop(link['url']))
+#     print link['url']
     client = MongoClient()
     db = client.sher
     db.address_links.update({"_id" : link['_id']}, {"$set" : {"crawling" : {"status" : "Done", "date" : datetime.datetime.utcnow()}}})
